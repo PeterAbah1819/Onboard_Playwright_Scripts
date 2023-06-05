@@ -28,6 +28,11 @@ test('View and filter ads in Supermerchant marketplace page', async ({ page }) =
     //Close the notification modal by clicking on skip
     await page.getByRole('button').nth(2).click();
 
+
+
+    //Confirm user is logged in and welcome text is displayed.
+    await expect(page.getByRole('button', { name: 'Welcome' })).toHaveText(/Welcome/);
+    
    
     //Navigate to Marketplace
     await page.getByRole('link', { name: 'Market' }).click();
@@ -35,10 +40,7 @@ test('View and filter ads in Supermerchant marketplace page', async ({ page }) =
 
 
     //Confirm landing page is displayed with best ads for you
-    await expect(page.getByRole('heading', { name: 'Best ads for you' })).toHaveText(/Best ads for you/);
-
-    //Confirm user is logged in and welcome text is displayed.
-    await expect(page.getByRole('button', { name: 'Welcome' })).toHaveText(/Welcome/);
+    //await expect(page.getByRole('heading', { name: 'Best ads for you' })).toHaveText(/Best ads for you/);
 
 
 

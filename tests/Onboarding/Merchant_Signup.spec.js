@@ -7,10 +7,10 @@ test('Test Merchant Signup invalid phone number', async ({ page }) => {
 
 //Testing signup with incremental email address
     // Expect a page to contain string.
-    await expect(page.getByRole('heading', { name: 'Login or create an account' })).toContainText(/Login or create an account/);
+    await expect(page.getByRole('heading', { name: 'Sign up or login to Onboard' })).toHaveText(/Sign up or login to Onboard/);
 
     // Expect a email textbox to be empty.
-    await expect(page.getByLabel('Email address')).toContainText("");
+    await expect(page.getByLabel('Email address')).toHaveText("");
 
     //Function for random email save to email variable
     // Generate a random email address
@@ -33,8 +33,8 @@ test('Test Merchant Signup invalid phone number', async ({ page }) => {
 
 
     //Confirm user is asked to enter phone number
-    await expect(page.getByRole('heading', { name: 'Add your phone number' })).toContainText(/Add your phone number/);
-    await expect(page.getByText('Provide a valid phone number for your Onboard account')).toContainText(/Provide a valid phone number for your Onboard account/);
+    await expect(page.getByRole('heading', { name: 'Add your phone number' })).toHaveText(/Add your phone number/);
+    await expect(page.getByText('We’ll verify this number to secure your account.')).toHaveText(/We’ll verify this number to secure your account./);
 
 
     //Add phone number
@@ -46,7 +46,7 @@ test('Test Merchant Signup invalid phone number', async ({ page }) => {
     await page.getByRole('button', { name: 'Continue' }).click();
 
     //Confirm error toast displayed
-    await expect(page.getByText('Invalid phone number')).toContainText(/Invalid phone number/);
+    await expect(page.getByText('Invalid phone number')).toHaveText(/Invalid phone number/);
 
 
 
@@ -64,10 +64,10 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
 
 //Testing signup with incremental email address
     // Expect a page to contain string.
-    await expect(page.getByRole('heading', { name: 'Login or create an account' })).toContainText(/Login or create an account/);
+    await expect(page.getByRole('heading', { name: 'Sign up or login to Onboard' })).toHaveText(/Sign up or login to Onboard/);
 
     // Expect a email textbox to be empty.
-    await expect(page.getByLabel('Email address')).toContainText("");
+    await expect(page.getByLabel('Email address')).toHaveText("");
 
     //Function for random email save to email variable
     // Generate a random email address
@@ -90,8 +90,8 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
 
 
     //Confirm user is asked to enter phone number
-    await expect(page.getByRole('heading', { name: 'Add your phone number' })).toContainText(/Add your phone number/);
-    await expect(page.getByText('Provide a valid phone number for your Onboard account')).toContainText(/Provide a valid phone number for your Onboard account/);
+    await expect(page.getByRole('heading', { name: 'Add your phone number' })).toHaveText(/Add your phone number/);
+    await expect(page.getByText('Provide a valid phone number for your Onboard account')).toHaveText(/Provide a valid phone number for your Onboard account/);
 
 
     //Select country code and Add phone number
@@ -108,7 +108,7 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
     await page.getByRole('button', { name: 'Continue' }).click();
 
     //Confirm the screen displayed is the merchant onboarding checklist
-    await expect(page.getByRole('heading', { name: 'Let’s set up your account' })).toContainText(/Let’s set up your account/);
+    await expect(page.getByRole('heading', { name: 'Let’s set up your account' })).toHaveText(/Let’s set up your account/);
     await expect(page.getByText('This will help establish your identity and secure your account. Takes about 5 mi')).toContainText(/This will help establish your identity and secure your account. Takes about 5 mi/);
 
 
@@ -119,9 +119,9 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
 
 
     //Confirm step 1 of 3 (personal details) page is displayed in the onboarding flow
-    await expect(page.getByRole('heading', { name: 'Step 1 of 3' })).toContainText(/Step 1 of 3/);
-    await expect(page.getByRole('heading', { name: 'Personal details' })).toContainText(/Personal details/);
-    await expect(page.getByText('Your personal details will serve as your identification on Onboard.')).toContainText(/Your personal details will serve as your identification on Onboard./);
+    await expect(page.getByRole('heading', { name: 'Step 1 of 3' })).toHaveText(/Step 1 of 3/);
+    await expect(page.getByRole('heading', { name: 'Personal details' })).toHaveText(/Personal details/);
+    await expect(page.getByText('Your personal details will serve as your identification on Onboard.')).toHaveText(/Your personal details will serve as your identification on Onboard./);
   
 
 
@@ -187,7 +187,7 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
     await page.getByRole('button', { name: 'Continue' }).click();
 
     //confirm error message displayed says the full name is invalid and can only have letters
-    await expect(page.getByText('Full name must be only letters')).toContainText(/Full name must be only letters/);
+    await expect(page.getByText('Full name must be only letters')).toHaveText(/Full name must be only letters/);
 
 
 //Fill in the invalid full name without space and confirm the error message displayed
@@ -207,7 +207,7 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
     await page.getByRole('button', { name: 'Continue' }).click();
 
     //confirm error message displayed says the full name is invalid and can only have letters
-    await expect(page.getByText('Full name must be at least 2 names')).toContainText(/Full name must be at least 2 names/);
+    await expect(page.getByText('Full name must be at least 2 names')).toHaveText(/Full name must be at least 2 names/);
 
 
 
@@ -230,7 +230,7 @@ test('Test Merchant Signup with invalid full name and username', async ({ page }
     await page.getByRole('button', { name: 'Continue' }).click();
 
     //confirm error message displayed says the Username is invalid and can not have space
-    await expect(page.getByText('Display name should have no space')).toContainText(/Display name should have no space/);
+    await expect(page.getByText('Display name should have no space')).toHaveText(/Display name should have no space/);
 
 
 
@@ -250,10 +250,10 @@ test('Test Merchant Signup Not Business Account and skip', async ({ page }) => {
 
 //Testing signup with incremental email address
     // Expect a page to contain string.
-    await expect(page.getByRole('heading', { name: 'Login or create an account' })).toContainText(/Login or create an account/);
+    await expect(page.getByRole('heading', { name: 'Sign up or login to Onboard' })).toHaveText(/Sign up or login to Onboard/);
 
     // Expect a email textbox to be empty.
-    await expect(page.getByLabel('Email address')).toContainText("");
+    await expect(page.getByLabel('Email address')).toHaveText("");
 
 
 
@@ -278,8 +278,8 @@ test('Test Merchant Signup Not Business Account and skip', async ({ page }) => {
 
 
     //Confirm user is asked to enter phone number
-    await expect(page.getByRole('heading', { name: 'Add your phone number' })).toContainText(/Add your phone number/);
-    await expect(page.getByText('Provide a valid phone number for your Onboard account')).toContainText(/Provide a valid phone number for your Onboard account/);
+    await expect(page.getByRole('heading', { name: 'Add your phone number' })).toHaveText(/Add your phone number/);
+    await expect(page.getByText('Provide a valid phone number for your Onboard account')).toHaveText(/Provide a valid phone number for your Onboard account/);
 
 
     //Add phone number
@@ -297,7 +297,7 @@ test('Test Merchant Signup Not Business Account and skip', async ({ page }) => {
 
     //Confirm the screen displayed is the merchant onboarding checklist
     await expect(page.getByText('Let’s set up your account' )).toContainText(/Let’s set up your account/);
-    await expect(page.getByText('This will help establish your identity and secure your account. Takes about 5 mi')).toContainText(/This will help establish your identity and secure your account. Takes about 5 mi/);
+    await expect(page.getByText('This will help establish your identity and secure your account. Takes about 5 mi')).toHaveText(/This will help establish your identity and secure your account. Takes about 5 mi/);
 
 
 
@@ -307,9 +307,9 @@ test('Test Merchant Signup Not Business Account and skip', async ({ page }) => {
 
 
     //Confirm step 1 of 3 (personal details) page is displayed in the onboarding flow
-    await expect(page.getByRole('heading', { name: 'Step 1 of 3' })).toContainText(/Step 1 of 3/);
-    await expect(page.getByRole('heading', { name: 'Personal details' })).toContainText(/Personal details/);
-    await expect(page.getByText('Your personal details will serve as your identification on Onboard.')).toContainText(/Your personal details will serve as your identification on Onboard./);
+    await expect(page.getByRole('heading', { name: 'Step 1 of 3' })).toHaveText(/Step 1 of 3/);
+    await expect(page.getByRole('heading', { name: 'Personal details' })).toHaveText(/Personal details/);
+    await expect(page.getByText('Your personal details will serve as your identification on Onboard.')).toHaveText(/Your personal details will serve as your identification on Onboard./);
   
 
             //Create a function that helps generate random fullname everytime
@@ -376,14 +376,14 @@ test('Test Merchant Signup Not Business Account and skip', async ({ page }) => {
 //Confirm the page displayed is asking the merchant to agree to terms and policies and confirm them
 
     //Confirm the terms modal is displayed
-    await expect(page.getByRole('heading', { name: 'Confirm the following statements below' })).toContainText(/Confirm the following statements below/);
+    await expect(page.getByRole('heading', { name: 'Confirm the following statements below' })).toHaveText(/Confirm the following statements below/);
     
     //Confirm legal use of funds terms text is displayed
-    await expect(page.getByText('I confirm that all funds used on Onboard (crypto and fiat) are from legal sources')).toContainText("I confirm that all funds used on Onboard (crypto and fiat) are from legal sources");
+    await expect(page.getByText('I confirm that all funds used on Onboard (crypto and fiat) are from legal sources')).toHaveText("I confirm that all funds used on Onboard (crypto and fiat) are from legal sources");
     //Click on the first radio box to confirm
     await page.getByText('I confirm that all funds used on Onboard (crypto and fiat) are from legal source').click();
     //Confirm terms text is displayed
-    await expect(page.getByText('I have read and accept Onboard\'s terms & conditions')).toContainText('I have read and accept Onboard\'s terms & conditions');
+    await expect(page.getByText('I have read and accept Onboard\'s terms & conditions')).toHaveText('I have read and accept Onboard\'s terms & conditions');
     //Click on the second radio box to confirm
     await page.getByText('I have read and accept Onboard\'s terms & conditions').click();
   
@@ -404,7 +404,7 @@ test('Test Merchant Signup Not Business Account and skip', async ({ page }) => {
     await page.getByRole('button', { name: 'Continue' }).click();
 
     //Clicking on continue leads the user back to the onboarding flow
-    await expect(page.getByRole('heading', { name: 'Now, let’s verify your identity!' })).toContainText(/Now, let’s verify your identity!/);
+    await expect(page.getByRole('heading', { name: 'Now, let’s verify your identity!' })).toHaveText(/Now, let’s verify your identity!/);
 
 
 

@@ -30,6 +30,38 @@ test('View and filter customer orders (Completed, Ongoing, Cancelled, Disputed i
 
 
 
+//Navigate to orders page and filter across the page to view all orders
+
+     //Click on orders tab to view ungoing orders
+     await page.getByRole('link', { name: 'Orders' }).click();
+
+     //Navigate to completed, disputed, cancelled and back to ongoing to view orders in those categories
+     await page.getByRole('button', { name: 'completed' }).click();
+     await page.getByRole('button', { name: 'disputed' }).click();
+     await page.getByRole('button', { name: 'cancelled' }).click();
+     await page.getByRole('button', { name: 'ongoing' }).click();
+
+     //Click on Buy to view all buy orders in the different categories (Completed, disputed, cancelled and ongoing)
+     await page.getByRole('button', { name: 'Buy' }).click();
+     await page.getByRole('button', { name: 'completed' }).click();
+     await page.getByRole('button', { name: 'disputed' }).click();
+     await page.getByRole('button', { name: 'cancelled' }).click();
+     await page.getByRole('button', { name: 'ongoing' }).click();
+
+     //Click on Sell to view all sell orders in the different categories (Completed, disputed, cancelled and ongoing)
+     await page.getByRole('button', { name: 'Sell' }).click();
+     await page.getByRole('button', { name: 'completed' }).click();
+     await page.getByRole('button', { name: 'disputed' }).click();
+     await page.getByRole('button', { name: 'cancelled' }).click();
+
+     //Navigate to the completed tab and click on all
+     await page.getByRole('button', { name: 'All' }).click();
+     await page.getByRole('button', { name: 'completed' }).click();
+
+     //COnfirm the refresh button and click on it to refresh the page
+     await expect (page.locator('div').filter({ hasText: 'Refresh' }).locator('div').first()).toHaveText(/Refresh/);
+     await page.getByRole('button', { name: 'Refresh' }).click();
+   
 
 
 
