@@ -104,7 +104,7 @@ test('Create Buy Ad, Invalid values to confirm copies and errors', async ({ page
      await page.getByPlaceholder('Type network name').click();
      await page.getByPlaceholder('Type network name').fill('BNB');
      //Confirm copy says unable to find what was searched for
-     await expect (page.getByRole('heading', { name: 'Can’t find your crypto currency?' })).toHaveText(/Can’t find your crypto currency?/);
+     await expect (page.getByRole('heading', { name: 'Cant find your preferred network?' })).toHaveText(/Cant find your preferred network?/);
      
      //Search for the right network name (BSC)
      await page.getByPlaceholder('Type network name').click();
@@ -149,14 +149,20 @@ test('Create Buy Ad, Invalid values to confirm copies and errors', async ({ page
      await expect (page.getByText('Your rate is fixed and will not change based on the current market rate')).toHaveText(/Your rate is fixed and will not change based on the current market rate/);
    
 
+        
+     //Change back to flexible rate
+     await page.getByRole('button', { name: 'Fixed price' }).click();
+     await page.getByRole('option', { name: 'Flexible price Your rate will change based on the current market rate.' }).click();
 
+
+     //Click on continue
      await page.getByRole('button', { name: 'Continue' }).click();
 
      //Confirm header text as Buy {token} with {Fiat}
      await expect (page.getByRole('heading', { name: 'Buy BNB with NGN' })).toHaveText(/Buy BNB with NGN/);
 
 //Set minimum amount and maximum amounts and check that they align with the total amount entered
-     //Enter total amount 100k
+     //Enter total amount 10k
      await page.getByLabel('Total amount').click();
      await page.getByLabel('Total amount').fill('10,0000');
      //Enter minimum amount 10
@@ -263,6 +269,54 @@ test('Create Buy Ad for USDT', async ({ page }) => {
     await page.getByRole('button', { name: 'Create new ad' }).click();
 
 
+    //Select binance smart chain network and click on continue 
+    await page.locator('a').filter({ hasText: 'BSC - Binance Smart Chain Testnet' }).click();
+    await page.getByRole('button', { name: 'Continue' }).click();
+    
+    //Select USDT to buy and click on continue
+    await page.getByRole('button', { name: 'Binance Coin (BNB)' }).click();
+    await page.getByText('Tether USD (USDT)').click();
+    await page.getByRole('button', { name: 'Continue' }).click();
+
+    //Enter total amount and limits and click on next.
+    await page.getByLabel('Total amount').click();
+    await page.getByLabel('Total amount').fill('10,0000');
+    await page.getByLabel('Minimum').click();
+    await page.getByLabel('Minimum').fill('1000');
+    await page.getByLabel('Maximum').click();
+    await page.getByLabel('Maximum').fill('10,0000');
+
+    //Select two payment channels from the payment method button and proceed to the next page
+    await page.getByRole('link', { name: 'Add Payment Methods' }).click();
+    await page.locator('a').filter({ hasText: 'Bank Transfer' }).click();
+    await page.getByRole('link', { name: 'Add Payment Methods' }).click();
+    await page.locator('a').filter({ hasText: 'Chipper Cash' }).click();
+    await page.getByRole('button', { name: 'Next' }).click();
+
+    //Set auto response messages and click next
+    await page.getByLabel('Auto-response (Optional)').click();
+    await page.getByLabel('Auto-response (Optional)').fill('test');
+    await page.getByLabel('Ads note (Optional)').click();
+    await page.getByLabel('Ads note (Optional)').fill('tested');
+    await page.getByRole('button', { name: 'Next' }).click();
+    
+    //Confirm text for ad details and post the ad and also confirm copy for posted ad details
+    await expect (page.getByRole('heading', { name: 'Buy USDT with NGN' })).toHaveText(/Buy USDT with NGN/);
+    await expect (page.getByText('₦1,000.00 - ₦100,000.00')).toHaveText(/₦1,000.00 - ₦100,000.00/);
+    await page.getByRole('button', { name: 'Post Ad' }).click();
+    await expect (page.getByRole('heading', { name: 'Your Ad is live!' })).toHaveText(/Your Ad is live!/);
+    await expect (page.getByText('Your Ad is now visible to everyone on Onboard. Please ensure you\'re available to')).toHaveText(/Your Ad is now visible to everyone on Onboard. Please ensure you\'re available to/);
+    await page.getByRole('button', { name: 'Done' }).click();
+
+    //Confirm the ad was posted a few seconds ago and is in the list of ads
+    await expect (page.getByText('a few seconds ago')).toHaveText(/a few seconds ago/);
+    await expect (page.getByText('₦1,000.00 - ₦100,000.00')).toHaveText(/₦1,000.00 - ₦100,000.00/);
+    await expect (page.locator('div').filter({ hasText: 'Buy' }).getByRole('paragraph')).toHaveText(/Buy/);
+
+
+
+
+
 
 
 })
@@ -303,6 +357,56 @@ test('Create Buy Ad for BUSD', async ({ page }) => {
      await page.getByRole('button').nth(2).click();
 
 
+
+     //Click on the ads tab and try to create an ad from there
+     await page.getByRole('link', { name: 'Ads' }).click();
+
+     await page.getByRole('button', { name: 'Create new ad' }).click();
+
+
+     //Select binance smart chain network and click on continue 
+     await page.locator('a').filter({ hasText: 'BSC - Binance Smart Chain Testnet' }).click();
+     await page.getByRole('button', { name: 'Continue' }).click();
+    
+     //Select USDT to buy and click on continue
+     await page.getByRole('button', { name: 'Binance Coin (BNB)' }).click();
+     await page.getByText('Binance USD (BUSD)').click();
+     await page.getByRole('button', { name: 'Continue' }).click();
+
+     //Enter total amount and limits and click on next.
+     await page.getByLabel('Total amount').click();
+     await page.getByLabel('Total amount').fill('10,0000');
+     await page.getByLabel('Minimum').click();
+     await page.getByLabel('Minimum').fill('1000');
+     await page.getByLabel('Maximum').click();
+     await page.getByLabel('Maximum').fill('10,0000');
+
+     //Select two payment channels from the payment method button and proceed to the next page
+     await page.getByRole('link', { name: 'Add Payment Methods' }).click();
+     await page.locator('a').filter({ hasText: 'Bank Transfer' }).click();
+     await page.getByRole('link', { name: 'Add Payment Methods' }).click();
+     await page.locator('a').filter({ hasText: 'Chipper Cash' }).click();
+     await page.getByRole('button', { name: 'Next' }).click();
+
+     //Set auto response messages and click next
+     await page.getByLabel('Auto-response (Optional)').click();
+     await page.getByLabel('Auto-response (Optional)').fill('test');
+     await page.getByLabel('Ads note (Optional)').click();
+     await page.getByLabel('Ads note (Optional)').fill('tested');
+     await page.getByRole('button', { name: 'Next' }).click();
+    
+     //Confirm text for ad details and post the ad and also confirm copy for posted ad details
+     await expect (page.getByRole('heading', { name: 'Buy BUSD with NGN' })).toHaveText(/Buy USDT with NGN/);
+     await expect (page.getByText('₦1,000.00 - ₦100,000.00')).toHaveText(/₦1,000.00 - ₦100,000.00/);
+     await page.getByRole('button', { name: 'Post Ad' }).click();
+     await expect (page.getByRole('heading', { name: 'Your Ad is live!' })).toHaveText(/Your Ad is live!/);
+     await expect (page.getByText('Your Ad is now visible to everyone on Onboard. Please ensure you\'re available to')).toHaveText(/Your Ad is now visible to everyone on Onboard. Please ensure you\'re available to/);
+     await page.getByRole('button', { name: 'Done' }).click();
+
+     //Confirm the ad was posted a few seconds ago and is in the list of ads
+     await expect (page.getByText('a few seconds ago')).toHaveText(/a few seconds ago/);
+     await expect (page.getByText('₦1,000.00 - ₦100,000.00')).toHaveText(/₦1,000.00 - ₦100,000.00/);
+     await expect (page.locator('div').filter({ hasText: 'Buy' }).getByRole('paragraph')).toHaveText(/Buy/);
 
 
 
